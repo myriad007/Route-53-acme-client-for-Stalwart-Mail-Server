@@ -1,0 +1,15 @@
+services:
+  acme-client:
+    image: stalwart-route53-acme:0.5
+    init: true
+    container_name: acme-client
+    environment:
+      - AWS_ACCESS_KEY_ID=secret_key
+      - AWS_SECRET_ACCESS_KEY=secret_access
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /docker/acme-client:/data
+      - /docker/stalwart/opt/etc/certs:/etc/ssl/acme
+    restart: unless-stopped
+networks: {}
