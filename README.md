@@ -14,20 +14,3 @@ Deployment of certs to Stalwart Mail’s expected paths
 Filtering to only deploy certs for mail* domains
 
 Safe renewal via cron or container entrypoint
-Build app
-Go to root folder of project
-Run scripts/prebuild.sh script
-/bin/bash scripts/prebuild.sh
-Build
-iOS:
-flutter build ios 
-Android:
-flutter build apk
-Web:
-change SERVER_URL in env.file with your JMAP server
-
-SERVER_URL=http://your-jmap-server.domain
-then run:
-
-flutter build web
-or you can find our images in: https://hub.docker.com/r/linagora/tmail-web
