@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# This script copies renewed or new domain(s) to the Stalwart /opt/etc/certs directory
 # Add or remove domains as needed
 DOMAINS=(
   mail.domain.ca
