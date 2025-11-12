@@ -1,11 +1,11 @@
 #!/bin/bash
-
+# Add or remove domains as needed
 DOMAINS=(
-  mail.kampk.ca
-  mail.sarahbrooks.ca
-  mail.myriad.ca
-  mail.triptychentertainment.com
-  mail.triptychdesigns.com
+  mail.domain.ca
+  mail.domain2.ca
+  mail.domain3.ca
+  mail.domain4.com
+  mail.domain5.com
 )
 
 for domain in "${DOMAINS[@]}"; do
