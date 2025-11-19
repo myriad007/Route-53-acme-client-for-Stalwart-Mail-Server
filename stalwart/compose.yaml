@@ -12,7 +12,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /mnt/Snas2-Pool1/docker/stalwart/opt:/opt/stalwart
     restart: unless-stopped
-    ports: #No really need for macvlan but shown here as a guide
+    ports: #Not really need for macvlan but shown here as a guide
       - 443:443
       - 8080:8080
       - 80:80
