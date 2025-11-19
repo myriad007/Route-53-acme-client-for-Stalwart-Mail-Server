@@ -14,8 +14,6 @@ Stalwart Mail currently lacks native integration with AWS Route 53 for ACME DNS�
 
 ## 🚀 Quick Start
 
-bash
-
 ```
 # Clone the repo: git clone https://github.com/your-username/route53-acme-client.gitcd route53-acme-client
 # Launch with Docker Compose: docker-compose up -d
@@ -28,25 +26,35 @@ bash
 
 ### Step 1: Configure Paths
 
-- yaml - /docker/stalwart/opt/etc/certs:/etc/ssl/acme- /docker/acme-client:/data
-- Ensure /docker/stalwart/opt/etc/certs maps to Stalwart’s /opt/etc/certs directory.
-- Both the **acme-client** and **stalwart** containers must share this folder with **read/write privileges**.
-- Copy all files from the acme-client directory (except the Dockerfile) into /docker/acme-client.
+### - In your docker-compose.yml, map volumes:
+
+```
+- /docker/stalwart/opt/etc/certs:/etc/ssl/acme
+- /docker/acme-client:/data
+```
+- Ensure `/docker/stalwart/opt/etc/certs` maps to Stalwart’s `/opt/etc/certs` directory.
+- Both acme-client and stalwart containers must share this folder with read/write privileges.
+- Copy all files from the acme-client directory (except the Dockerfile) into `/docker/acme-client`.
 - Customize the provided scripts to include your domain(s).
 
 ### Step 2: Deploy the ACME Client
 
 - Start the **acme-client** container.
-- Code /opt/etc/certs
+- It will issue certificates for your domains and copy them into /opt/etc/certs
 
 ### Step 3: Register Certificates in Stalwart
 
-- In the Stalwart UI, navigate to: **Management → Settings → Certificate → Add Certificate**
-- Code %{file:/opt/stalwart/etc/certs/mail.domain.ca/fullchain.pem}%
+### - In the Stalwart UI, navigate to:
+**Management → Settings → Certificate → Add Certificate**
+- Add your domain’s certificate and private key:
+
+```
+%{file:/opt/stalwart/etc/certs/mail.domain.ca/fullchain.pem}%
 %{file:/opt/stalwart/etc/certs/mail.domain.ca/privkey.pem}%
-- This updates Stalwart’s config.toml automatically and persists across reboots.
-- 🔁 **Repeat this process for each additional domain** you want to secure (e.g., mail.example.com, mail.anotherdomain.net). Each domain will need its own certificate and private key entry.
-- ⚠️ Avoid editing config.toml manually.
+```
+- This updates Stalwart’s `config.toml` automatically and persists across reboots.
+- ⚠️ Avoid editing `config.toml` manually.
+- 🔁 **Repeat this process for each additional domain** you want to secure (e.g., `mail.example.com`, `mail.anotherdomain.net`). Each domain will need its own certificate and private key entry.
 
 ## ✅ Notes
 
