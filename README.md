@@ -32,7 +32,6 @@ Stalwart Mail will automatically detect them once mapped correctly.
 Step 1: Configure Paths
 In your docker-compose.yml, map the following volumes:
 
-yaml
 - /docker/stalwart/opt/etc/certs:/etc/ssl/acme
 - /docker/acme-client:/data
 Ensure /docker/stalwart/opt/etc/certs maps to Stalwart’s /opt/etc/certs directory.
@@ -48,14 +47,12 @@ Start the acme-client container.
 
 It will issue certificates for your domains and copy them into:
 
-Code
 /opt/etc/certs
 Step 3: Register Certificates in Stalwart
 In the Stalwart UI, navigate to: Management → Settings → Certificate → Add Certificate
 
 Add your domain’s certificate and private key:
 
-Code
 %{file:/opt/stalwart/etc/certs/mail.domain.ca/fullchain.pem}%
 %{file:/opt/stalwart/etc/certs/mail.domain.ca/privkey.pem}%
 This updates Stalwart’s config.toml automatically and persists across reboots.
