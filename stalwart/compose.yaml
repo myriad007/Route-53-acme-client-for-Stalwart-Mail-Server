@@ -1,0 +1,59 @@
+services:
+  stalwart-mail:
+    networks:
+      macvlan:
+        ipv4_address: 10.40.10.77
+    image: stalwartlabs/stalwart:v0.14.1
+    environment:
+      - STALWART_METRICS_PROMETHEUS_ENABLED=true
+    user: root:root
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /mnt/Snas2-Pool1/docker/stalwart/opt:/opt/stalwart
+    restart: unless-stopped
+    ports: #No really need for macvlan but shown here as a guide
+      - 443:443
+      - 8080:8080
+      - 80:80
+      - 25:25
+      - 587:587
+      - 465:465
+      - 143:143
+      - 993:993
+      - 4190:4190
+      - 110:110
+      - 995:995
+  prometheus:
+    image: prom/prometheus:latest
+    networks:
+      macvlan:
+        ipv4_address: 10.40.10.78
+    ports:
+      - 9090:9090
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /mnt/Snas2-Pool1/docker/stalwart/opt/scripts/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    depends_on:
+      - stalwart-mail
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - 3000:3000
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /mnt/Snas2-Pool1/docker/stalwart/grafana:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=secret
+    networks:
+      macvlan:
+        ipv4_address: 10.40.10.76
+networks:
+  macvlan:
+    external: true
