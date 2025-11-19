@@ -51,3 +51,11 @@ Stalwart Mail currently lacks native integration with AWS Route 53 for ACME DNSâ
 - Renewal is handled safely via cron or container entrypoint.
 - Certificates are filtered to only deploy for mail* domains.
 - Permissions must be correctly set for both containers to ensure smooth operation.
+
+## ğŸ³ Docker Image
+
+You can pull the image directly from Docker Hub:
+
+```bash
+docker pull myriad007/stalwart-route53-acme:latest
+
