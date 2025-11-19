@@ -18,7 +18,7 @@ Safe renewal via cron or container entrypoint
 How to deploy
 
 Step 1: Set up your paths in the Route 53 Acme-client using the docker-compose file's suggested format: - /docker/stalwart/opt/etc/certs:/etc/ssl/acme
-        Make sure your folder is mapped to Stawarts "/opt/etc/certs" directory. See the stalwart folder a compose example, as the acme-client & stalwart            container need to be mapped to the same folder. Make sure you set the permissions on the two containers so they have r/w privileges. 
+        Make sure your folder is mapped to Stawarts "/opt/etc/certs" directory. See the stalwart folder's compose example, as the acme-client & stalwart            container need to be mapped to the same folder. Make sure you set the permissions on the two containers so they have r/w privileges. 
         The other path that needs to be mapped is: "/docker/acme-client:/data". Using Tiny File Manager, I copy all of the files in the acme-client                 directory (except the dockefile) to the "/docker/acme-client" folder. You will need to customize the scripts where indicated to add your domain(s).
 
 Step 2: Deploy the acme-client container. It will issue your domain certs and copy them in the stalwart/opt/etc/certs directory.
