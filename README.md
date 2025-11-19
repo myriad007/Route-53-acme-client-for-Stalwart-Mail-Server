@@ -12,16 +12,6 @@ Stalwart Mail currently lacks native integration with AWS Route 53 for ACME DNS�
 - Filtering to only deploy certs for mail* domains
 - Safe renewal via cron or container entrypoint
 
-## 🚀 Quick Start
-
-```
-# Clone the repo: git clone https://github.com/your-username/route53-acme-client.gitcd route53-acme-client
-# Launch with Docker Compose: docker-compose up -d
-```
-
-- Certificates will be issued and placed in /opt/etc/certs.
-- Stalwart Mail will automatically detect them once mapped correctly.
-
 ## ⚙️ Deployment Guide
 
 ### Step 1: Configure Paths
