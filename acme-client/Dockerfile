@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-LABEL maintainer="Richard Houghton"
+LABEL maintainer="myriad007"
 
 # Install dependencies (bash included here, no need to repeat later)
 RUN apk --no-cache add \
@@ -26,7 +26,7 @@ RUN curl https://get.acme.sh | bash
 RUN ln -s /root/.acme.sh/acme.sh /usr/local/bin/acme.sh
 
 # Acme account registration
-RUN /root/.acme.sh/acme.sh --register-account -m noreply@myriad.ca
+RUN /root/.acme.sh/acme.sh --register-account -m noreply@yourdomain.ca
 
 # Create log file for cron
 RUN touch /var/log/cron.log
