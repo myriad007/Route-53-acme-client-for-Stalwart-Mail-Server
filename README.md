@@ -27,10 +27,7 @@ Stalwart Mail currently lacks native integration with AWS Route 53 for ACME DNS�
 - Copy all files from the acme-client directory (except the Dockerfile) into `/docker/acme-client`.
 - Customize the provided scripts to include your domain(s).
 
-### Step 2: Create your own ACME Client custom container
-- Open the above dockerfile and customize all of the needed components and then build your custom container
-
-### Step 3: Register Certificates in Stalwart
+### Step 2: Register Certificates in Stalwart
 
 ### - In the Stalwart UI, navigate to:
 **Management → Settings → Certificate → Add Certificate**
@@ -43,6 +40,9 @@ Stalwart Mail currently lacks native integration with AWS Route 53 for ACME DNS�
 - This updates Stalwart’s `config.toml` automatically and persists across reboots.
 - ⚠️ Avoid editing `config.toml` manually.
 - 🔁 **Repeat this process for each additional domain** you want to secure (e.g., `mail.example.com`, `mail.anotherdomain.net`). Each domain will need its own certificate and private key entry.
+
+### Step 3: Create your own ACME Client custom container
+- Open the above dockerfile and customize all of the needed components and then build your custom container
 
 ### Step 4: Deploy your custom ACME Client container
 
